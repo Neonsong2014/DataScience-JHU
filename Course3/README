@@ -1,5 +1,5 @@
 Steps to execute R scripts in run_analysis.R file
-=====================================================================================================================
+===========================================================================================
 1. Download the data set from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 2. Unzip the dataset to your RStudio or R desktop application's default workspace file directory location.  It will create a folder as UCI HAR Dataset.
 3. Keep all file names unchanged inside folder UCI HAR Dataset.
@@ -11,7 +11,7 @@ Steps to execute R scripts in run_analysis.R file
 
 
 Data transformation steps that run_analysis.R scripts performs to produce the final output text file as required by the project assignment.
-====================================================================================================================
+==========================================================================================
 1.  Create a training data record data frame using X_train.txt in train data set.
 2.  Create a feature data frame using features.txt.
 2.  Set the column header names of the data record data frame using a feature vector extracted from the feature data frame.
