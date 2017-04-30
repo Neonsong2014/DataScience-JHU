@@ -1,202 +1,188 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf820
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww38200\viewh21120\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+Understanding about UCI HAR Dataset 
+=============================================================================================================
+UCI HAR Dataset contains two datasets, train and test. Each data set contains raw inertial signal records of accelerometer and gyroscope in axial x, y and z, data records in X_train.txt and X_test.txt files, subject records in subject_test.txt and subject_train.txt files, activity label records in y_train.txt, y_test.txt files.
 
-\f0\fs24 \cf0 Understanding about UCI HAR Dataset \
-=================================================\
-\
-UCI HAR Dataset contains two datasets, train and test. Each data set contains raw inertial signal records of accelerometer and gyroscope in axial x, y and z, data records in X_train.txt and X_test.txt files, subject records in subject_test.txt and subject_train.txt files, activity label records in y_train.txt, y_test.txt files.  \
-\
-There are 30 subjects or volunteers, 70% of them were selected as training group and 30% as testing group.  They participated in 6 activity categories.\
-\
-According to the information from README and features_info.txt in the dataset, each raw inertial signal was sampled at a rate of 50 Hz in a sliding window of 2.56 second so each raw signal has 50 x 2.56 = 128 values. Processing these 128 data values for each raw signal (including noise filtering, Fast Fourier Transformation and other operations mentioned in features_info.txt file) has produced a set of statistic results data for each axial signal.  \
-\
-Combing the statistic results data from each x, y, z axial signal has produced a data record with 561 variables (features).  In final there are 7352 data records produced by the volunteers in training group (70%) saved in X_train.txt as training data set, 2947 records by the volunteers in testing group( 30%) saved in X_test.txt as testing dataset.  Their correspondent activity records and subject records are saved in y_train.txt, y_test.txt, subject_train.txt, subject_test.txt.\
-\
-Code book - Data transformation tasks to complete Project assignment\
-===========================================================\
-\
-1.  Create a training data record data frame using X_train.txt in train data set.\
-2.  Create a feature data frame using features.txt.\
-2.  Set the column header names of the data record data frame using a feature vector extracted from the feature data frame.\
-3.  Create a subject data frame using subject_train.txt in train data set.  This data frame has one numeric column that is the subject ranging  \
-     from 1 to 30.  Set column name as subject.\
-4.  Create an activity label data frame using y_train.txt in train data set.  This data frame has one numeric column that is the activity id that matches \
-     the activity id in activity_label.txt file.  Set its column header as activityid.\
-5.  Add a new column, recordindex to the activity label data frame from step 4 using its own row index. Recordindex is used to keep activity label order \
-     in synch with data record order in training data set X_train.txt.\
-6.  Create an activity label lookup data frame using activity_labels.txt.  Set its column headers to activityid, activity respectively.  Activity column has \
-     description for each activity id.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 7.  Merge activity label lookup data frame with activity label data frame on their activityid columns to create a new activity label data frame that has activity \
-     column.  Sort the new activity label data frame by its recordindex so its activity column is ordered by index of the data \
-     records.\
-8.  The newly created activity label data frame in step 7 should have the same number of rows as training data record data frame in step 1, which is 7352.\
-9.  The newly created subject data frame should have the same number of rows as training data record data frame in step 1, which is 7352.\
-10. Add activity label data frame to training data record data frame via column binding so activity and recordindex columns are the first two \
-      columns in the updated training data record data frame. \
-11. Add subject data frame to the newly created training data record data frame in step 10 via column binding so subject column is the first \
-      column of the updated training data record data frame.\
-12. Repeat step 1 to 11 with X_test.txt, subject_test.txt, y_test.txt in test data set to produce a testing data record data frame with 2947 rows.\
-13. Combine training data frame with testing data frame via row binding to create an all data records data frame that contains 10299 data\
-      records with columns names as subject, activitytid, activity, recordindex plus all 561 features (variables).\
-14. Extract subject, activity columns and other columns contains \'93mean()\'94 or \'93std()\'94 from the all data records data frame in step 13 into a new data frame.\
-15. Group the new data frame at step 14 by its subject, activity columns, and then average each other columns to produce a final output data frame that \
-      contains 180 rows of mean data, each with 81 variables including subject, activity and other 79 variables,  in 6 activity categories for 30 subjects.\
-16. The final data frame is saved to a text file named as accelerometer-gyroscope-mean-std-dataset.txt in RStudio\'92s default workspace.\
- \
-Variables in the output text file after the data transformation tasks listed above\
-==================================================================\
-subject\
-activity\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 tBodyAcc-mean()-X\
-tBodyAcc-mean()-Y\
-tBodyAcc-mean()-Z\
-tBodyAcc-std()-X\
-tBodyAcc-std()-Y\
-tBodyAcc-std()-Z\
-tGravityAcc-mean()-X\
-tGravityAcc-mean()-Y\
-tGravityAcc-mean()-Z\
-tGravityAcc-std()-X\
-tGravityAcc-std()-Y\
-tGravityAcc-std()-Z\
-tBodyAccJerk-mean()-X\
-tBodyAccJerk-mean()-Y\
-tBodyAccJerk-mean()-Z\
-tBodyAccJerk-std()-X\
-tBodyAccJerk-std()-Y\
-tBodyAccJerk-std()-Z\
-tBodyGyro-mean()-X\
-tBodyGyro-mean()-Y\
-tBodyGyro-mean()-Z\
-tBodyGyro-std()-X\
-tBodyGyro-std()-Y\
-tBodyGyro-std()-Z\
-tBodyGyroJerk-mean()-X\
-tBodyGyroJerk-mean()-Y\
-tBodyGyroJerk-mean()-Z\
-tBodyGyroJerk-std()-X\
-tBodyGyroJerk-std()-Y\
-tBodyGyroJerk-std()-Z\
-tBodyAccMag-mean()\
-tBodyAccMag-std()\
-tGravityAccMag-mean()\
-tGravityAccMag-std()\
-tBodyAccJerkMag-mean()\
-tBodyAccJerkMag-std()\
-tBodyGyroMag-mean()\
-tBodyGyroMag-std()\
-tBodyGyroJerkMag-mean()\
-tBodyGyroJerkMag-std()\
-fBodyAcc-mean()-X\
-fBodyAcc-mean()-Y\
-fBodyAcc-mean()-Z\
-fBodyAcc-std()-X\
-fBodyAcc-std()-Y\
-fBodyAcc-std()-Z\
-fBodyAcc-meanFreq()-X\
-fBodyAcc-meanFreq()-Y\
-fBodyAcc-meanFreq()-Z\
-fBodyAccJerk-mean()-X\
-fBodyAccJerk-mean()-Y\
-fBodyAccJerk-mean()-Z\
-fBodyAccJerk-std()-X\
-fBodyAccJerk-std()-Y\
-fBodyAccJerk-std()-Z\
-fBodyAccJerk-meanFreq()-X\
-fBodyAccJerk-meanFreq()-Y\
-fBodyAccJerk-meanFreq()-Z\
-fBodyGyro-mean()-X\
-fBodyGyro-mean()-Y\
-fBodyGyro-mean()-Z\
-fBodyGyro-std()-X\
-fBodyGyro-std()-Y\
-fBodyGyro-std()-Z\
-fBodyGyro-meanFreq()-X\
-fBodyGyro-meanFreq()-Y\
-fBodyGyro-meanFreq()-Z\
-fBodyAccMag-mean()\
-fBodyAccMag-std()\
-fBodyAccMag-meanFreq()\
-fBodyBodyAccJerkMag-mean()\
-fBodyBodyAccJerkMag-std()\
-fBodyBodyAccJerkMag-meanFreq()\
-fBodyBodyGyroMag-mean()\
-fBodyBodyGyroMag-std()\
-fBodyBodyGyroMag-meanFreq()\
-fBodyBodyGyroJerkMag-mean()\
-fBodyBodyGyroJerkMag-std()\
-fBodyBodyGyroJerkMag-meanFreq()\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 subject: volunteer id, ranging from 1 to 30\
-activity: activity category description.\
-mean(): Mean value by each volunteer for each activity using dataset\'92s original estimated mean value of each feature from original signal.\
-std(): Standard deviation by each volunteer for each activity using dataset\'92s original estimated standard deviation value of each feature from original signal.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
+There are 30 subjects or volunteers, 70% of them were selected as training group and 30% as testing group.  They participated in 6 activity categories.
+
+According to the information from README and features_info.txt in the dataset, each raw inertial signal was sampled at a rate of 50 Hz in a sliding window of 2.56 second so each raw signal has 50 x 2.56 = 128 values. Processing these 128 data values for each raw signal (including noise filtering, Fast Fourier Transformation and other operations mentioned in features_info.txt file) has produced a set of statistic results data for each axial signal.
+
+Combing the statistic results data from each x, y, z axial signal has produced a data record with 561 variables (features).  In final there are 7352 data records produced by the volunteers in training group (70%) saved in X_train.txt as training data set, 2947 records by the volunteers in testing group( 30%) saved in X_test.txt as testing dataset.  Their correspondent activity records and subject records are saved in y_train.txt, y_test.txt, subject_train.txt, subject_test.txt.
+
+Data transformation tasks to complete Project assignment
+==============================================================================================================
+1.  Create a training data record data frame using X_train.txt in train data set.
+2.  Create a feature data frame using features.txt.
+2.  Set the column header names of the data record data frame using a feature vector extracted from the feature data frame.
+3.  Create a subject data frame using subject_train.txt in train data set.  This data frame has one numeric column that is the subject 
+    ranging from 1 to 30.  Set column name as subject.
+4.  Create an activity label data frame using y_train.txt in train data set.  This data frame has one numeric column that is the activity
+    id that matches the activity id in activity_label.txt file.  Set its column header as activityid.
+5.  Add a new column, recordindex to the activity label data frame from step 4 using its own row index. Recordindex is used to keep 
+    activity label order in synch with data record order in training data set X_train.txt.
+6.  Create an activity label lookup data frame using activity_labels.txt.  Set its column headers to activityid, activity respectively.  
+    Activity column has description for each activity id.
+    Merge activity label lookup data frame with activity label data frame on their activityid columns to create a new activity label data 
+    frame that has activity column.  Sort the new activity label data frame by its recordindex so its activity column is ordered by index 
+    of the data records.
+8.  The newly created activity label data frame in step 7 should have the same number of rows as training data record data frame in step 
+    1, which is 7352.
+9.  The newly created subject data frame should have the same number of rows as training data record data frame in step 1, which is 7352.
+10. Add activity label data frame to training data record data frame via column binding so activity and recordindex columns are the first 
+    two columns in the updated training data record data frame.
+11. Add subject data frame to the newly created training data record data frame in step 10 via column binding so subject column is the 
+    first column of the updated training data record data frame.
+12. Repeat step 1 to 11 with X_test.txt, subject_test.txt, y_test.txt in test data set to produce a testing data record data frame with 
+    2947 rows.
+13. Combine training data frame with testing data frame via row binding to create an all data records data frame that contains 10299 data
+    records with columns names as subject, activitytid, activity, recordindex plus all 561 features (variables).
+14. Extract subject, activity columns and other columns contains mean() or std() from the all data records data frame in step 13 into a 
+    new data frame.
+15. Group the new data frame at step 14 by its subject, activity columns, and then average each other columns to produce a final output 
+    data frame that contains 180 rows of mean data, each with 81 variables including subject, activity and other 79 variables,  in 6 
+    activity categories for 30 subjects.
+16. The final data frame is saved to a text file named as accelerometer-gyroscope-mean-std-dataset.txt in RStudio\'92s default workspace.
+    
+Variables in the output text file after the data transformation tasks listed above
+=====================================================================================================================
+subject
+activity
+tBodyAcc-mean()-X
+tBodyAcc-mean()-Y
+tBodyAcc-mean()-Z
+tBodyAcc-std()-X
+tBodyAcc-std()-Y
+tBodyAcc-std()-Z
+tGravityAcc-mean()-X
+tGravityAcc-mean()-Y
+tGravityAcc-mean()-Z
+tGravityAcc-std()-X
+tGravityAcc-std()-Y
+tGravityAcc-std()-Z
+tBodyAccJerk-mean()-X
+tBodyAccJerk-mean()-Y
+tBodyAccJerk-mean()-Z
+tBodyAccJerk-std()-X
+tBodyAccJerk-std()-Y
+tBodyAccJerk-std()-Z
+tBodyGyro-mean()-X
+tBodyGyro-mean()-Y
+tBodyGyro-mean()-Z
+tBodyGyro-std()-X
+tBodyGyro-std()-Y
+tBodyGyro-std()-Z
+tBodyGyroJerk-mean()-X
+tBodyGyroJerk-mean()-Y
+tBodyGyroJerk-mean()-Z
+tBodyGyroJerk-std()-X
+tBodyGyroJerk-std()-Y
+tBodyGyroJerk-std()-Z
+tBodyAccMag-mean()
+tBodyAccMag-std()
+tGravityAccMag-mean()
+tGravityAccMag-std()
+tBodyAccJerkMag-mean()
+tBodyAccJerkMag-std()
+tBodyGyroMag-mean()
+tBodyGyroMag-std()
+tBodyGyroJerkMag-mean()
+tBodyGyroJerkMag-std()
+fBodyAcc-mean()-X
+fBodyAcc-mean()-Y
+fBodyAcc-mean()-Z
+fBodyAcc-std()-X
+fBodyAcc-std()-Y
+fBodyAcc-std()-Z
+fBodyAcc-meanFreq()-X
+fBodyAcc-meanFreq()-Y
+fBodyAcc-meanFreq()-Z
+fBodyAccJerk-mean()-X
+fBodyAccJerk-mean()-Y
+fBodyAccJerk-mean()-Z
+fBodyAccJerk-std()-X
+fBodyAccJerk-std()-Y
+fBodyAccJerk-std()-Z
+fBodyAccJerk-meanFreq()-X
+fBodyAccJerk-meanFreq()-Y
+fBodyAccJerk-meanFreq()-Z
+fBodyGyro-mean()-X
+fBodyGyro-mean()-Y
+fBodyGyro-mean()-Z
+fBodyGyro-std()-X
+fBodyGyro-std()-Y
+fBodyGyro-std()-Z
+fBodyGyro-meanFreq()-X
+fBodyGyro-meanFreq()-Y
+fBodyGyro-meanFreq()-Z
+fBodyAccMag-mean()
+fBodyAccMag-std()
+fBodyAccMag-meanFreq()
+fBodyBodyAccJerkMag-mean()
+fBodyBodyAccJerkMag-std()
+fBodyBodyAccJerkMag-meanFreq()
+fBodyBodyGyroMag-mean()
+fBodyBodyGyroMag-std()
+fBodyBodyGyroMag-meanFreq()
+fBodyBodyGyroJerkMag-mean()
+fBodyBodyGyroJerkMag-std()
+fBodyBodyGyroJerkMag-meanFreq()
+
+subject: volunteer id, ranging from 1 to 30
+activity: activity category description.
+mean(): Mean value by each volunteer for each activity using dataset\'92s original estimated mean value of each feature from original signal.
+std(): Standard deviation by each volunteer for each activity using dataset\'92s original estimated standard deviation value of each feature from original signal.
+
 Features information from original data set\
 =====================================================================\
-\
-The raw inertial signals are time domain signals (prefix 't' to denote time) that were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. \
-\
-Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). \
-\
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). \
-\
-These signals were used to estimate variables of the feature vector for each pattern:  \
-'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.\
-\
-tBodyAcc-XYZ\
-tGravityAcc-XYZ\
-tBodyAccJerk-XYZ\
-tBodyGyro-XYZ\
-tBodyGyroJerk-XYZ\
-tBodyAccMag\
-tGravityAccMag\
-tBodyAccJerkMag\
-tBodyGyroMag\
-tBodyGyroJerkMag\
-fBodyAcc-XYZ\
-fBodyAccJerk-XYZ\
-fBodyGyro-XYZ\
-fBodyAccMag\
-fBodyAccJerkMag\
-fBodyGyroMag\
-fBodyGyroJerkMag\
-\
-The set of variables that were estimated from these signals are: \
-\
-mean(): Mean value\
-std(): Standard deviation\
-mad(): Median absolute deviation \
-max(): Largest value in array\
-min(): Smallest value in array\
-sma(): Signal magnitude area\
-energy(): Energy measure. Sum of the squares divided by the number of values. \
-iqr(): Interquartile range \
-entropy(): Signal entropy\
-arCoeff(): Autorregresion coefficients with Burg order equal to 4\
-correlation(): correlation coefficient between two signals\
-maxInds(): index of the frequency component with largest magnitude\
-meanFreq(): Weighted average of the frequency components to obtain a mean frequency\
-skewness(): skewness of the frequency domain signal \
-kurtosis(): kurtosis of the frequency domain signal \
-bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.\
-angle(): Angle between to vectors.\
-\
-Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:\
-\
-gravityMean\
-tBodyAccMean\
-tBodyAccJerkMean\
-tBodyGyroMean\
-tBodyGyroJerkMean\
-\
-The complete list of variables of each feature vector is available in 'features.txt'\
+The raw inertial signals are time domain signals (prefix 't' to denote time) that were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+The set of variables that were estimated from these signals are: 
+mean(): Mean value
+std(): Standard deviation
+mad(): Median absolute deviation 
+max(): Largest value in array
+min(): Smallest value in array
+sma(): Signal magnitude area
+energy(): Energy measure. Sum of the squares divided by the number of values. 
+iqr(): Interquartile range 
+entropy(): Signal entropy
+arCoeff(): Autorregresion coefficients with Burg order equal to 4
+correlation(): correlation coefficient between two signals
+maxInds(): index of the frequency component with largest magnitude
+meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+skewness(): skewness of the frequency domain signal 
+kurtosis(): kurtosis of the frequency domain signal 
+bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+angle(): Angle between to vectors.
+Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+gravityMean
+tBodyAccMean
+tBodyAccJerkMean
+tBodyGyroMean
+tBodyGyroJerkMean
+The complete list of variables of each feature vector is available in 'features.txt'
 }
