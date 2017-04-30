@@ -128,11 +128,11 @@ fBodyBodyGyroJerkMag-meanFreq()
 
 subject: volunteer id, ranging from 1 to 30
 activity: activity category description.
-mean(): Mean value by each volunteer for each activity using dataset\'92s original estimated mean value of each feature from original signal.
-std(): Standard deviation by each volunteer for each activity using dataset\'92s original estimated standard deviation value of each feature from original signal.
+mean(): Mean value by each volunteer for each activity using dataset's original estimated mean value of each feature from original signal.
+std(): Standard deviation by each volunteer for each activity using dataset's original estimated standard deviation value of each feature from original signal.
 
-Features information from original data set\
-=====================================================================\
+Features information from original data set
+================================================================================
 The raw inertial signals are time domain signals (prefix 't' to denote time) that were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
 Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
