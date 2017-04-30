@@ -1,0 +1,43 @@
+Steps to execute R scripts in run_analysis.R file
+=================================================================================================================================
+1. Download the data set from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+2. Unzip the dataset to your RStudio or R desktop application's default workspace file directory location.  It will create a folder as UCI HAR Dataset.
+3. Keep all file names unchanged inside folder UCI HAR Dataset.
+4. Download run_analysis.R file to your RStudio or R desktop application's default workspace.
+5. Use source command to load the run_analysis.R.
+6. Execute run_analysis method.  It takes less than 30 seconds to create an ouput data set specified by the project assignment 
+   and save it as a text file to workspace.
+7. The output text file name and location is printed out on the console.
+8. In case any file name is changed the script will stop with error messages.
+
+
+Data transformation steps that run_analysis.R scripts performs to produce the final output text file as required by the 
+project assignment.
+=================================================================================================================================
+1.  Create a training data record data frame using X_train.txt in train data set.
+2.  Create a feature data frame using features.txt.
+2.  Set the column header names of the data record data frame using a feature vector extracted from the feature data frame.
+3.  Create a subject data frame using subject_train.txt in train data set.  This data frame has one numeric column that is the subject ranging  
+     from 1 to 30.  Set column name as subject.
+4.  Create an activity label data frame using y_train.txt in train data set.  This data frame has one numeric column that is the activity id that matches 
+     the activity id in activity_label.txt file.  Set its column header as activityid.
+5.  Add a new column, recordindex to the activity label data frame from step 4 using its own row index. Recordindex is used to keep activity label order 
+     in synch with data record order in training data set X_train.txt.
+6.  Create an activity label lookup data frame using activity_labels.txt.  Set its column headers to activityid, activity respectively.  Activity column has 
+     description for each activity id.
+7.  Merge activity label lookup data frame with activity label data frame on their activityid columns to create a new activity label data frame that has activity 
+     column.  Sort the new activity label data frame by its recordindex so its activity column is ordered by index of the data 
+     records.
+8.  The newly created activity label data frame in step 7 should have the same number of rows as training data record data frame in step 1, which is 7352.
+9.  The newly created subject data frame should have the same number of rows as training data record data frame in step 1, which is 7352.
+10. Add activity label data frame to training data record data frame via column binding so activity and recordindex columns are the first two 
+      columns in the updated training data record data frame. 
+11. Add subject data frame to the newly created training data record data frame in step 10 via column binding so subject column is the first 
+      column of the updated training data record data frame.
+12. Repeat step 1 to 11 with X_test.txt, subject_test.txt, y_test.txt in test data set to produce a testing data record data frame with 2947 rows.
+13. Combine training data frame with testing data frame via row binding to create an all data records data frame that contains 10299 data
+      records with columns names as subject, activitytid, activity, recordindex plus all 561 features (variables).
+14. Extract subject, activity columns and other columns contains “mean()” or “std()” from the all data records data frame in step 13 into a new data frame.
+15. Group the new data frame at step 14 by its subject, activity columns, and then average each other columns to produce a final output data frame that 
+      contains 180 rows of mean data, each with 81 variables including subject, activity and other 79 variables,  in 6 activity categories for 30 subjects.
+16. The final data frame is saved to a text file named as accelerometer-gyroscope-mean-std-dataset.txt in RStudio’s default workspace.
